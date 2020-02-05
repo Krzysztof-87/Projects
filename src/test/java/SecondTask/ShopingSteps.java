@@ -55,7 +55,8 @@ public class ShopingSteps {
     }
 
     @And("^User choose checkout option$")
-    public void userChooseCheckoutOption()throws StaleElementReferenceException {
+    public void userChooseCheckoutOption()throws InterruptedException {
+        Thread.sleep(1500);
         shopingInfo.Checkout();
     }
 

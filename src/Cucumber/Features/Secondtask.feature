@@ -6,7 +6,7 @@ Feature: SecondTask
     When User choose item
     And User choose size and quantity
       | size | quantity |
-      | M    | 5        |
+      | L    | 8        |
     And User choose checkout option
     And User confirm delivery address
     And User choose payment method

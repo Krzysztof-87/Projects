@@ -92,6 +92,7 @@ public class ShopingInfo {
         quantityChoose.clear();
         quantityChoose.sendKeys(quantity);
         SubmitButton.click();
+
     }
 
 
