@@ -1,13 +1,17 @@
 package FirstTask;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class firstTaskSteps {
@@ -30,32 +34,52 @@ public class firstTaskSteps {
     }
 
     @When("^Logged user goes to address$")
-    public void loggedUserGoesToAddress() {
+    public void loggedUserGoesToAddress() throws InterruptedException {
+        Thread.sleep(1500);
         firsttaskInfo.goToAccountDetail();
+        Thread.sleep(1500);
 
     }
 
     @And("^User add \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void userAddAndAndAndAndAnd(String arg0, String arg1, String arg2, String arg3, String arg4, String arg5)  {
-        firsttaskInfo.setAdress(arg0,arg1,arg2,arg3,arg4,arg5);
-        // Write code here that turns the phrase above into concrete actions
+    public void userAddAndAndAndAndAnd(String alias, String address, String city, String postcode, String country, String phone)  {
+        firsttaskInfo.setAdress(alias,address,city,postcode, country,phone);
+
 
     }
 
-    @And("^User saves all information and can see message \"([^\"]*)\"\\.$")
-    public void userSavesAllInformationAndCanSeeMessage( String message)  {
+    @And("^User saves all information$")
+    public void userSavesAllInformation( ) throws InterruptedException  {
+        Thread.sleep(1500);
         firsttaskInfo.submitAddress();
-        Assert.assertEquals(message, firsttaskInfo.getUpdateInformation());
-        // Write code here that turns the phrase above into concrete actions
+        Thread.sleep(1500);
+
 
     }
+    @And("^and can see message \"([^\"]*)\" and  \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void andCanSeeMessageAndAndAndAndAnd(String alias, String address, String city, String postcode, String country, String phone) {
+
+        String lastAlias = firsttaskInfo.compareAliasToAlias();
+        String lastAddress = firsttaskInfo.CompareAddresses();
+        System.out.println(lastAlias);
+        System.out.println(lastAddress);
+        Assert.assertTrue(lastAlias.contains(alias));
+        Assert.assertTrue(lastAddress.contains(address));
+        Assert.assertTrue(lastAddress.contains(city));
+        Assert.assertTrue(lastAddress.contains(postcode));
+        Assert.assertTrue(lastAddress.contains(country));
+        Assert.assertTrue(lastAddress.contains(phone));
+
+    }
+
 
     @Then("^Logged user deleted address and can see \"([^\"]*)\"$")
-    public void loggedUserDeletedAddressAndCanSee(String message)  {
+    public void loggedUserDeletedAddressAndCanSee(String arg0) {
         firsttaskInfo.deleteAddress();
-        Assert.assertEquals(message, firsttaskInfo.getUpdateInformation());
         driver.quit();
-        // Write code here that turns the phrase above into concrete actions
 
     }
+
+
+
 }

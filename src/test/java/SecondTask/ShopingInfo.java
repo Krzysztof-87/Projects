@@ -32,7 +32,7 @@ public class ShopingInfo {
     WebElement SubmitButton;
 
 
-    @FindBy(xpath= "./html/body/div[1]/div/div/div[2]/div/div[2]/div/div/a")
+    @FindBy(xpath= "//div[@class='cart-content-btn']/a")
     WebElement goToCheckout;
 
 

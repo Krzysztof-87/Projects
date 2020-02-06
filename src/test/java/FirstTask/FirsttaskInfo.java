@@ -7,9 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class FirsttaskInfo {
 
-    private static WebDriver driver;
+    static WebDriver driver;
 
     public FirsttaskInfo(WebDriver driver) {
         this.driver = driver;
@@ -46,8 +48,13 @@ public class FirsttaskInfo {
     @FindBy(css = ".btn.btn-primary")
     WebElement saveButton;
 
-    @FindBy(css = " .alert.alert-success")
-    WebElement successInformation;
+
+    @FindBy(xpath ="/html/body/main/section/div/div/section/section/div[2]/article/div[1]/h4")
+    List<WebElement> compareAlias;
+
+    @FindBy(xpath = "//address")
+    List<WebElement> compareAddresses;
+
 
     @FindBy(css = "a[href*=delete] i")
     WebElement delete;
@@ -86,15 +93,23 @@ public class FirsttaskInfo {
         countryInput.sendKeys(country);
         phoneInput.click();
         phoneInput.sendKeys(phone);
+
+
     }
+
 
     public void submitAddress(){
         saveButton.click();
     }
 
-    public String getUpdateInformation() {
-        return successInformation.getText();
+    public String compareAliasToAlias() {
+        return compareAlias.get(compareAlias.size()-1).getText();
     }
+    public String CompareAddresses(){
+        return compareAddresses.get(compareAddresses.size()-1).getText();
+
+    }
+
 
     public void deleteAddress(){
         delete.click();
