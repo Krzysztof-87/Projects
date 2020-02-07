@@ -1,6 +1,7 @@
 package FirstTask;
 
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,9 +56,13 @@ public class FirsttaskInfo {
     @FindBy(xpath = "//address")
     List<WebElement> compareAddresses;
 
-
-    @FindBy(css = "a[href*=delete] i")
+    @FindBy(xpath = "//*[@id='content']/descendant::h4[position()=2]/following::span[position()=2]")
     WebElement delete;
+
+    @FindBy(xpath = "//*[contains(text(), 'Address successfully deleted!')]")
+    WebElement message;
+
+
 
     public void loginAs(String email, String password) {
         WebElement loginInput = driver.findElement(By.name("email"));
@@ -111,16 +116,22 @@ public class FirsttaskInfo {
     }
 
 
-    public void deleteAddress(){
-        delete.click();
-    }
+    public void deleteAddress() {
+            delete.click();
+        }
 
+        public String Confirmation(){
+            return message.getText();
 
-
-
-
-
-
-
-
+            }
 }
+
+
+
+
+
+
+
+
+
+

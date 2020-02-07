@@ -6,6 +6,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
@@ -43,6 +44,13 @@ public class ShopingSteps {
         shopingInfo.Item();
     }
 
+    @And("^check discount$")
+    public void checkDiscount() {
+        String Thisdiscount = shopingInfo.DiscountCheck();
+        System.out.println(Thisdiscount);
+        Assert.assertEquals(Thisdiscount,"SAVE 20%");
+    }
+
 
     @And("^User choose size and quantity$")
     public void userChooseSizeAndQuantity(DataTable credentials) throws StaleElementReferenceException {
@@ -75,7 +83,9 @@ public class ShopingSteps {
     @And("^User choose obligation to pay$")
     public void userChooseObligationToPay() throws StaleElementReferenceException {
         shopingInfo.Confirmation();
+
     }
+
 
     @And("^System will do screenshot with order Confirmation$")
     public void systemWillDoScreenshotWithOrderConfirmation() throws IOException {
@@ -88,11 +98,13 @@ public class ShopingSteps {
     }
 
     @Then("^Check orders history$")
-    public void checkOrdersHistory() throws StaleElementReferenceException{
+    public void checkOrdersHistory() throws InterruptedException{
         shopingInfo.Information();
-
-
+        Thread.sleep(1500);
+        driver.quit();
 
 
     }
+
+
 }

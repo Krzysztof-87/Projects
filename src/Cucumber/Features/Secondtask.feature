@@ -4,9 +4,10 @@ Feature: SecondTask
 
     Given User is logged in to shop
     When User choose item
+    And check discount
     And User choose size and quantity
       | size | quantity |
-      | L    | 44       |
+      | S    | 7       |
     And User choose checkout option
     And User confirm delivery address
     And User choose payment method

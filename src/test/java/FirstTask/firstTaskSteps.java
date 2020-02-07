@@ -22,7 +22,7 @@ public class firstTaskSteps {
 
     @Given("^User is logged in to the shop$")
     public void userIsLoggedInToTheShop() {
-        System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -42,23 +42,25 @@ public class firstTaskSteps {
     }
 
     @And("^User add \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void userAddAndAndAndAndAnd(String alias, String address, String city, String postcode, String country, String phone)  {
-        firsttaskInfo.setAdress(alias,address,city,postcode, country,phone);
+    public void userAddAndAndAndAndAnd(String alias, String address, String city, String postcode, String country, String phone) {
+        firsttaskInfo.setAdress(alias, address, city, postcode, country, phone);
 
 
     }
 
     @And("^User saves all information$")
-    public void userSavesAllInformation( ) throws InterruptedException  {
+    public void userSavesAllInformation() throws InterruptedException {
         Thread.sleep(1500);
         firsttaskInfo.submitAddress();
         Thread.sleep(1500);
 
 
     }
-    @And("^and can see message \"([^\"]*)\" and  \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void andCanSeeMessageAndAndAndAndAnd(String alias, String address, String city, String postcode, String country, String phone) {
 
+
+
+    @And("^and can see, that this address \"([^\"]*)\" and  \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" is correct$")
+    public void andCanSeeThatThisAddressAndAndAndAndAndIsCorrect(String alias, String address, String city, String postcode, String country, String phone)  {
         String lastAlias = firsttaskInfo.compareAliasToAlias();
         String lastAddress = firsttaskInfo.CompareAddresses();
         System.out.println(lastAlias);
@@ -74,12 +76,16 @@ public class firstTaskSteps {
 
 
     @Then("^Logged user deleted address and can see \"([^\"]*)\"$")
-    public void loggedUserDeletedAddressAndCanSee(String arg0) {
+    public void loggedUserDeletedAddressAndCanSee(String message) throws InterruptedException {
+        Thread.sleep(1500);
         firsttaskInfo.deleteAddress();
+        Assert.assertEquals(message, firsttaskInfo.Confirmation());
+        Thread.sleep(1500);
         driver.quit();
 
     }
 
-
-
 }
+
+
+

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class ShopingInfo {
 
     private static WebDriver driver;
@@ -21,6 +23,9 @@ public class ShopingInfo {
 
     @FindBy(xpath = "//span[@class='product']")
     WebElement itemChoose;
+
+    @FindBy(xpath ="//*[@id='main']/div[1]/div[2]/div[1]/div[2]/div/span[2]")
+    List<WebElement> getDiscount;
 
     @FindBy(name ="group[1]")
     WebElement sizeChoose;
@@ -54,6 +59,7 @@ public class ShopingInfo {
     @FindBy(css = ".btn.btn-primary.center-block")
     WebElement obligationToPay;
 
+
     @FindBy(className = "account")
     WebElement userInfo;
 
@@ -83,6 +89,11 @@ public class ShopingInfo {
         itemInput.sendKeys("Hummingbird Printed Sweater");
         itemInput.click();
         itemChoose.click();
+
+    }
+
+    public String DiscountCheck(){
+        return getDiscount.get(getDiscount.size()-1).getText();
 
     }
 
@@ -117,6 +128,7 @@ public class ShopingInfo {
         terms.click();
         obligationToPay.click();
     }
+
 
 
     public void Information(){
